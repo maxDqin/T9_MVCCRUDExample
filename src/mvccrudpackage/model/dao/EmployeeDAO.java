@@ -47,12 +47,12 @@ public class EmployeeDAO {
     	PreparedStatement preparedStatement = null;
         // try-with-resource statement will auto close the connection.
         try {
-        	connection = getConnection(); 
-        	preparedStatement = connection.prepareStatement(INSERTEMPSQL);
-            preparedStatement.setString(1, emp.getEname());
-            preparedStatement.setInt(2, emp.getEage());
+        	connection = ____(); 
+        	preparedStatement = connection.prepareStatement(____);
+            preparedStatement.setString(1, ____.____());
+            preparedStatement.setInt(____, ____.____());
             System.out.println(preparedStatement);
-            preparedStatement.executeUpdate();
+            preparedStatement.____();
         } catch (SQLException e) {
             	printSQLException(e);
         } finally {
