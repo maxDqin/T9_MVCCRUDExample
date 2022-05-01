@@ -98,21 +98,18 @@ public class EmployeeDAO {
         List < Employee > emps = new ArrayList < > ();
         // Step 1: Establishing a Connection
         try { 
-        	connection = getConnection();
+        	____
             // Step 2:Create a statement using connection object
-            preparedStatement = connection.prepareStatement(SELECTALLEMPS);
+        	____
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
-            rs = preparedStatement.executeQuery();
+        	____
 
             // Step 4: Process the ResultSet object.
-            while (rs.next()) {
-                int Eid = rs.getInt("Eid");
-                String Ename = rs.getString("Ename");
-                int Eage = rs.getInt("Eage");
-              
-                emps.add(new Employee(Eid, Ename, Eage));
-            }
+        	____
+        	____
+        	...
+        	____
         } catch (SQLException e) {
             printSQLException(e);
         }
