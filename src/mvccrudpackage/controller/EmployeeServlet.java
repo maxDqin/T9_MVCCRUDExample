@@ -1,14 +1,15 @@
 package mvccrudpackage.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 
 import mvccrudpackage.model.bean.Employee;
 import mvccrudpackage.model.dao.EmployeeDAO;
@@ -62,17 +63,17 @@ public class EmployeeServlet extends HttpServlet {
 			case "new":
 				showNewEmployee(request, response);
 				break;
-			case "insert":
-				insertEmployee(request, response);
+			case "____":
+				insertNewEmployee(request, response);
 				break;
 			case "delete":
-				deleteEmployee(request, response);
+				deleteExistingEmployee(request, response);
 				break;
 			case "edit":
 				showEditEmployee(request, response);
 				break;
 			case "update":
-				updateEmployee(request, response);
+				updateExistingEmployee(request, response);
 				break;
 			default:
 				listEmployee(request, response);
@@ -84,30 +85,30 @@ public class EmployeeServlet extends HttpServlet {
 	}// End of doPost method
 
 	private void listEmployee(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		List<Employee> listEmployee = empDAO.selectAllEmployees();
-		request.setAttribute("listEmployee", listEmployee);
+			throws SQLException, IOException, ServletException {//action=default
+		List<Employee> allEmployee = empDAO.selectAllEmployees();
+		request.setAttribute("listEmployees", allEmployee);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void showNewEmployee(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException {//action="new"
 		RequestDispatcher dispatcher = request.getRequestDispatcher("employeeform.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	private void insertEmployee(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
-		String ename = request.getParameter("name");
-		int eage = Integer.parseInt(request.getParameter("age"));
-		Employee e = new Employee(ename, eage);
-		empDAO.insertEmployee(e);
-		response.sendRedirect(request.getContextPath() + "/EmployeeServlet?action=list");
+	private void insertNewEmployee(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {//action="insert"
+		String eName = ____.getParameter("name");
+		int eAge = ____.____(____.____("age"));
+		Employee e = new ____(____, ____);
+		empDAO.____(e);
+		response.sendRedirect(request.getContextPath() + "/EmployeeServlet?action=____");
 	}
 
 	private void showEditEmployee(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
+			throws SQLException, ServletException, IOException {//action="edit"
 		int id = Integer.parseInt(request.getParameter("id"));
 		Employee existingEmployee = empDAO.selectEmployee(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("employeeform.jsp");
@@ -115,8 +116,8 @@ public class EmployeeServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void updateEmployee(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+	private void updateExistingEmployee(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {//action="update"
 		int id = Integer.parseInt(request.getParameter("id"));
 		String ename = request.getParameter("name");
 		int eage = Integer.parseInt(request.getParameter("age"));
@@ -125,11 +126,9 @@ public class EmployeeServlet extends HttpServlet {
 		response.sendRedirect(request.getContextPath() + "/EmployeeServlet?action=list");
 	}
 	
-	private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+	private void deleteExistingEmployee(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		empDAO.deleteEmployee(id);
-	      response.sendRedirect(request.getContextPath() +"/EmployeeServlet?action=list");
+	    response.sendRedirect(request.getContextPath() +"/EmployeeServlet?action=list");
 	}
-
-
 }

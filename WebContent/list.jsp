@@ -17,7 +17,7 @@
 				<th>Name</th>
 				<th>Age</th>
 			</tr>
-			<c:forEach var="emp" items="${listEmployee}">
+			<c:forEach var="emp" items="${listEmployees}">
 				<tr align=center>
 					<td><c:out value="${emp.getEid()}" /></td>
 					<td><c:out value="${emp.getEname()}" /></td>
